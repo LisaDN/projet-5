@@ -27,7 +27,7 @@ fetch("http://localhost:3000/api/products/" + id)
                     //continuer injection prix description
                     //ajouter ecouteur evenement sur bouton ajouter au panier
                     //vérifier couleur et quantité bien sélectionner
-                    // créer un nouveau script + creer fonction (rajouter dans product.html) ne pas oublier :appeler dans script.js(add to cart)
+                    //créer un nouveau script + creer fonction (rajouter dans product.html) ne pas oublier :appeler dans script.js(add to cart)
                 })
                 .catch(function (err) {
                     console.log(err)
