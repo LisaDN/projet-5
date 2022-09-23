@@ -29,16 +29,27 @@ fetch("http://localhost:3000/api/products/" + id)
                     let prices = document.createElement("prices")
                     prices = product.price
                     price.innerHTML = product.price
+
                     //injection description
                     let descriptions = document.createElement("descriptions")
                     descriptions = product.description
                     description.innerHTML = product.description
+
                     //ajouter ecouteur evenement sur bouton ajouter au panier
                     let addButton = document.getElementById("addToCart")
-                    addButton.addEventListener('click', function () {
-                        alert("votre produit a été ajouté au panier")
-                    })
+                    addButton.addEventListener('click', valider)
                     //vérifier couleur et quantité bien sélectionner
+                    let quantity = document.getElementById("quantity")
+                    let buttonText = "ajouté !"
+                    function valider() {
+                        if (colors.value != "" && quantity.value != "0") {
+                            //alert("Votre panier a été ajouté")
+                            addButton.innerText = buttonText
+                        } else {
+                            alert("Merci de remplir tous les champs")
+                        }
+                    }
+
                     //créer un nouveau script + creer fonction (rajouter dans product.html) ne pas oublier :appeler dans script.js(add to cart)
                 })
                 .catch(function (err) {
