@@ -39,9 +39,7 @@ fetch("http://localhost:3000/api/products/" + id)
                     const addButton = document.getElementById("addToCart")
                     let quantity = document.getElementById("quantity")
 
-
-
-                    addButton.addEventListener('click', function ytr() {
+                    addButton.addEventListener('click', function () {
                         //vérifier couleur et quantité bien sélectionner
                         if (colors.value != "" && quantity.value != "0") {
                             alert("Votre panier a été ajouté")
