@@ -36,19 +36,30 @@ fetch("http://localhost:3000/api/products/" + id)
                     description.innerHTML = product.description
 
                     //ajouter ecouteur evenement sur bouton ajouter au panier
-                    let addButton = document.getElementById("addToCart")
-                    addButton.addEventListener('click', valider)
-                    //vérifier couleur et quantité bien sélectionner
+                    const addButton = document.getElementById("addToCart")
                     let quantity = document.getElementById("quantity")
-                    let buttonText = "ajouté !"
-                    function valider() {
+
+
+
+                    addButton.addEventListener('click', function ytr() {
+                        //vérifier couleur et quantité bien sélectionner
                         if (colors.value != "" && quantity.value != "0") {
-                            //alert("Votre panier a été ajouté")
-                            addButton.innerText = buttonText
+                            alert("Votre panier a été ajouté")
+                            //ajout au local storage
+                            let optionSelect = {
+                                id: id,
+                                colors: colors.value,
+                                quantity: quantity.value
+                            }
+                            const addStorage = JSON.stringify(optionSelect)
+                            localStorage.setItem('validate', addStorage)
+
+                            console.log("id:" + id, "quantité:" + quantity.value, "colors:" + colors.value)
                         } else {
                             alert("Merci de remplir tous les champs")
                         }
-                    }
+
+                    })
 
                     //créer un nouveau script + creer fonction (rajouter dans product.html) ne pas oublier :appeler dans script.js(add to cart)
                 })
