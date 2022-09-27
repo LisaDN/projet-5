@@ -43,15 +43,7 @@ fetch("http://localhost:3000/api/products/" + id)
                         //vérifier couleur et quantité bien sélectionner
                         if (colors.value != "" && quantity.value != "0") {
                             alert("Votre panier a été ajouté")
-                            //ajout au local storage
-                            let optionSelect = {
-                                id: id,
-                                colors: colors.value,
-                                quantity: quantity.value
-                            }
-                            const addStorage = JSON.stringify(optionSelect)
-                            localStorage.setItem('validate', addStorage)
-
+                            addToCart(id, colors.value, quantity.value)
                             console.log("id:" + id, "quantité:" + quantity.value, "colors:" + colors.value)
                         } else {
                             alert("Merci de remplir tous les champs")
@@ -59,7 +51,7 @@ fetch("http://localhost:3000/api/products/" + id)
 
                     })
 
-                    //créer un nouveau script + creer fonction (rajouter dans product.html) ne pas oublier :appeler dans script.js(add to cart)
+
                 })
                 .catch(function (err) {
                     console.log(err)
