@@ -6,10 +6,12 @@ function getProductOfLocalStorage() {
         return {}
     }
     return JSON.parse(products)
+
 }
 
 function updateLocalStorage(products) {
     accessToLocalStorage.setItem("kanapCart", JSON.stringify(products))
+
 }
 
 function addToCart(id, color, quantity) {
@@ -18,9 +20,11 @@ function addToCart(id, color, quantity) {
     if (items[id]) {
         if (items[id][color]) {
             items[id][color] = parseInt(items[id][color]) + parseInt(quantity)
+
         } else {
             items[id][color] = parseInt(quantity)
         }
+
     }
 
     if (!items[id]) {
@@ -30,4 +34,7 @@ function addToCart(id, color, quantity) {
     }
 
     updateLocalStorage(items)
+
 }
+
+
