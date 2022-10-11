@@ -38,7 +38,7 @@ function addToCart(id, color, quantity) {
 }
 
 /**
- * documentation js 
+ * gestion quantite produit
  * @param {string} id 
  * @param {string} color 
  * @param {string} quantity 
@@ -54,7 +54,7 @@ function changeProductQuantity(id, color, quantity) {
     location.reload()
 }
 
-//gestion suppression
+//gestion suppression produit
 function removeProduct(id, color) {
     let products = getProductOfLocalStorage()
     if (products[id][color]) {

@@ -1,4 +1,5 @@
-pr
+let urlParams = (new URL(location)).searchParams
+let id = urlParams.get("id")
 let itemImg = document.getElementsByClassName("item__img")
 let title = document.getElementById("title")
 let price = document.getElementById("price")
