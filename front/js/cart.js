@@ -109,8 +109,8 @@ let city = document.getElementById("city")
 let email = document.getElementById("email")
 //creation regexp validation form
 let nameRegExp = /^[A-ZA-Za-z\é\è\ê\-]+/g
-let emailRegExp = /^[a-zA-Z0-9.-_]+@[a-zA-Z0-9.-_]+$/
-let addressRegExp = /^[a-zA-Z0-9]/g
+let addressRegExp = /^[a-zA-Z0-9\é\è\ê\-]+/g
+let emailRegExp = /^([a-zA-Z0-9.-_]+)@[a-zA-Z]+\.{1}([a-z]{2,3})+/g
 let messageError = "Veuillez remplir ce champ"
 
 
@@ -141,14 +141,54 @@ buttonForm.addEventListener('click', function (e) {
 
   // vérification les 5 champs remplis
   if (verifTotalCount === 5) {
-    //ici mettre condition envoi commande
+    //condition envoi commande
+    //mise en place objet contenant informations du formulaire de contact
+    let objectContact = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      address: address.value,
+      city: city.value,
+      email: email.value
+    }
+
+    console.log(objectContact)
+    //tableau contenant id des produits commandés
+    let tabId = []
+    for (let [id] of Object.entries(productsFromLocalStorage)) {
+      tabId.push(id)
+      console.log(tabId)
+    }
+
+    //Requête envoi commande à l'API
+
+    fetch("http://localhost:3000/api/products/order", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(tabId, objectContact)
+    })
+      .then(function (response) {
+        if (response.ok) {
+          response.json()
+        }
+      })
+      .then(function (d) {
+        console.log(d)
+        location.replace("/front/html/confirmation.html")
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+
   }
 
 })
 //verification prénom
 const firstNameVerif = function (firstName) {
   let firstNameError = document.getElementById("firstNameErrorMsg")
-  console.log(firstName.value)
+
   if (firstName.value === "" || firstName.value < 3) {
     firstNameError.innerHTML = messageError
     firstName.style.border = "2px solid red"
@@ -232,10 +272,7 @@ const emailVerif = function (email) {
   }
 }
 
-  //fin fonction formulaire
-
-
-
+//fin fonction formulaire
 
 
 
