@@ -150,13 +150,12 @@ buttonForm.addEventListener('click', function (e) {
       city: city.value,
       email: email.value
     }
-
     console.log(objectContact)
     //tableau contenant id des produits commandés
-    let tabId = []
+    let orderId = []
     for (let [id] of Object.entries(productsFromLocalStorage)) {
-      tabId.push(id)
-      console.log(tabId)
+      orderId.push(id)
+      console.log(orderId)
     }
 
     //Requête envoi commande à l'API
@@ -167,21 +166,23 @@ buttonForm.addEventListener('click', function (e) {
         'Accept': 'application/json',
         'Content-type': 'application/json'
       },
-      body: JSON.stringify(tabId, objectContact)
+      body: JSON.stringify(orderId, objectContact)
     })
       .then(function (response) {
         if (response.ok) {
           response.json()
         }
       })
-      .then(function (d) {
-        console.log(d)
-        location.replace("/front/html/confirmation.html")
+      .then(function (data) {
+        // redirection + mise en place id commande dans url
+        location.replace("/front/html/confirmation.html?id=" + orderId)
       })
       .catch(function (error) {
         console.log(error)
       })
 
+  } else {
+    alert("vérifier que tous les champs soient bien remplis")
   }
 
 })
