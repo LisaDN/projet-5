@@ -163,8 +163,7 @@ buttonForm.addEventListener('click', function (e) {
     fetch("http://localhost:3000/api/products/order", {
       method: "POST", //envoi des données 
       headers: {
-        // 'Accept': 'application/json',
-        'Content-type': 'application/json;charset=UTF-8'
+        'Content-type': 'application/json'
       },
       body: JSON.stringify({ contact, products })
     })
