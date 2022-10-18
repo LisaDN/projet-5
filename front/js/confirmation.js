@@ -8,3 +8,6 @@ console.log(id)
 let orderId = document.getElementById("orderId")
 
 orderId.innerHTML = id
+
+//efface le local storage
+localStorage.clear()

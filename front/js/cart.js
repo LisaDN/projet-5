@@ -110,7 +110,7 @@ let email = document.getElementById("email")
 //creation regexp validation form
 let nameRegExp = /^[A-ZA-Za-z\é\è\ê\-]+/g
 let addressRegExp = /^[a-zA-Z0-9\é\è\ê\-]+/g
-let emailRegExp = /^([a-zA-Z0-9.-_]+)@[a-zA-Z]+\.{1}([a-z]{2,3})+/g
+let emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g
 let messageError = "Veuillez remplir ce champ"
 
 
@@ -143,39 +143,44 @@ buttonForm.addEventListener('click', function (e) {
   if (verifTotalCount === 5) {
     //condition envoi commande
     //mise en place objet contenant informations du formulaire de contact
-    let objectContact = {
+    let contact = {
       firstName: firstName.value,
       lastName: lastName.value,
       address: address.value,
       city: city.value,
       email: email.value
     }
-    console.log(objectContact)
+    console.log(contact)
     //tableau contenant id des produits commandés
-    let orderId = []
+    let products = []
     for (let [id] of Object.entries(productsFromLocalStorage)) {
-      orderId.push(id)
-      console.log(orderId)
+      products.push(id)
+      console.log(products)
     }
 
     //Requête envoi commande à l'API
 
     fetch("http://localhost:3000/api/products/order", {
-      method: "POST",
+      method: "POST", //envoi des données 
       headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
+        // 'Accept': 'application/json',
+        'Content-type': 'application/json;charset=UTF-8'
       },
-      body: JSON.stringify(orderId, objectContact)
+      body: JSON.stringify({ contact, products })
     })
       .then(function (response) {
         if (response.ok) {
           response.json()
+            .then(function (data) {
+              console.log(data)
+              // redirection + mise en place id commande dans url
+              location.replace("/front/html/confirmation.html?id=" + data.orderId)
+
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         }
-      })
-      .then(function (data) {
-        // redirection + mise en place id commande dans url
-        location.replace("/front/html/confirmation.html?id=" + orderId)
       })
       .catch(function (error) {
         console.log(error)
