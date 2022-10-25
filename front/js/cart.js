@@ -186,7 +186,7 @@ buttonForm.addEventListener('click', function (e) {
       })
 
   } else {
-    alert("vérifier que tous les champs soient bien remplis")
+    alert("Vérifier que tous les champs soient bien remplis")
   }
 
 })

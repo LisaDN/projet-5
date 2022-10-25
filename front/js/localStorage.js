@@ -10,7 +10,7 @@ function getProductOfLocalStorage() {
 }
 
 function updateLocalStorage(products) {
-    accessToLocalStorage.setItem("kanapCart", JSON.stringify(products))
+    accessToLocalStorage.setItem("kanapCart", JSON.stringify(products)) //set = définir 
 
 }
 
@@ -26,7 +26,7 @@ function addToCart(id, color, quantity) {
         }
 
     }
-
+    // si n'existe pas on crée un nouveau
     if (!items[id]) {
         items[id] = {
             [color]: parseInt(quantity)
@@ -58,6 +58,7 @@ function changeProductQuantity(id, color, quantity) {
 function removeProduct(id, color) {
     let products = getProductOfLocalStorage()
     if (products[id][color]) {
+        // si dans objet ID contient plusieurs couleurs
         if (Object.keys(products[id]).length > 1) {
             delete products[id][color]
         } else {

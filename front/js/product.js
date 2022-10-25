@@ -46,7 +46,7 @@ fetch("http://localhost:3000/api/products/" + id)
                             addToCart(id, colors.value, quantity.value)
                             console.log("id:" + id, "quantité:" + quantity.value, "colors:" + colors.value)
                         } else {
-                            alert("Merci de remplir tous les champs")
+                            alert("Merci de bien choisir une couleur et une quantité")
                         }
 
                     })
